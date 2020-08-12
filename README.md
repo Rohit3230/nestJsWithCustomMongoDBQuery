@@ -78,15 +78,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## IMP Thing to know
 
   Source From:-
+  <br>
     https://docs.nestjs.com/recipes/hot-reload
 
 ****************************************
   For Apply Hot-Reload functionality Follow below points:
    Install Required packages by following command.
+<br>
    npm i --save-dev webpack-node-externals start-server-webpack-plugin
 
 ****************************************
   Create a new file named with: webpack-hmr.config.js with below code: 
+  <br>
     const webpack = require('webpack');
     const nodeExternals = require('webpack-node-externals');
     const StartServerPlugin = require('start-server-webpack-plugin');
@@ -114,9 +117,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ****************************************
     Add Code in main.ts file:-
+    <br>
     declare const module: any;
 
-****************************************
     async function bootstrap() {
       const app = await NestFactory.create(AppModule);
       await app.listen(3000);
@@ -130,8 +133,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ****************************************
     change in package.json file:-
+    <br>
     "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js"
 
 ****************************************
     Use command:
+    <br>
     npm run start:dev
