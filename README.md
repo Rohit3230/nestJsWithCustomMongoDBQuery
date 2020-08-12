@@ -73,3 +73,60 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](LICENSE).
+
+
+## IMP Thing to know
+
+  Source From:-
+    https://docs.nestjs.com/recipes/hot-reload
+
+  For Apply Hot-Reload functionality Follow below points:
+   Install Required packages by following command.
+   npm i --save-dev webpack-node-externals start-server-webpack-plugin
+
+  Create a new file named with: webpack-hmr.config.js with below code: 
+    const webpack = require('webpack');
+    const nodeExternals = require('webpack-node-externals');
+    const StartServerPlugin = require('start-server-webpack-plugin');
+
+    module.exports = function(options) {
+      return {
+        ...options,
+        entry: ['webpack/hot/poll?100', options.entry],
+        watch: true,
+        externals: [
+          nodeExternals({
+            allowlist: ['webpack/hot/poll?100'],
+          }),
+        ],
+        plugins: [
+          ...options.plugins,
+          new webpack.HotModuleReplacementPlugin(),
+          new webpack.WatchIgnorePlugin([/\.js$/, /\.d\.ts$/]),
+          new StartServerPlugin({ name: options.output.filename }),
+        ],
+      };
+    };
+
+
+
+    Add Code in main.ts file:-
+    declare const module: any;
+
+    async function bootstrap() {
+      const app = await NestFactory.create(AppModule);
+      await app.listen(3000);
+
+      if (module.hot) {
+        module.hot.accept();
+        module.hot.dispose(() => app.close());
+      }
+    }
+    bootstrap();
+
+
+    change in package.json file:-
+    "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js"
+
+    Use command:
+    npm run start:dev
