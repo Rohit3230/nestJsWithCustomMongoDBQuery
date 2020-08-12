@@ -117,7 +117,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ****************************************
     Add Code in main.ts file:-
-    <br>
+<br>
     declare const module: any;
 
     async function bootstrap() {
@@ -133,10 +133,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ****************************************
     change in package.json file:-
-    <br>
+<br>
     "start:dev": "nest build --webpack --webpackPath webpack-hmr.config.js"
 
 ****************************************
     Use command:
-    <br>
+<br>
     npm run start:dev
